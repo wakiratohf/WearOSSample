@@ -1,0 +1,5 @@
+package com.toh.wearossample.utils
+
+object WearPreferenceKeys {
+    const val FREF_APP_SETTINGS = "fref_app_settings"
+}
