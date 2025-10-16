@@ -59,6 +59,7 @@ dependencies {
 
     implementation(project(":shared"))
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.wear.phone.interactions)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)

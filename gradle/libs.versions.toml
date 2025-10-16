@@ -25,6 +25,7 @@ rxjava2Android = "2.1.1"
 rxjava2Java = "2.2.21"
 rxjava2Kotlin = "2.4.0"
 navigationCompose = "2.9.5"
+wearPhoneInteractions = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +57,7 @@ rxjava2-rxandroid = { group = "io.reactivex.rxjava2", name = "rxandroid", versio
 rxjava2-rxjava = { group = "io.reactivex.rxjava2", name = "rxjava", version.ref = "rxjava2Java" }
 rxjava2-rxkotlin = { group = "io.reactivex.rxjava2", name = "rxkotlin", version.ref = "rxjava2Kotlin" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-wear-phone-interactions = { group = "androidx.wear", name = "wear-phone-interactions", version.ref = "wearPhoneInteractions" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

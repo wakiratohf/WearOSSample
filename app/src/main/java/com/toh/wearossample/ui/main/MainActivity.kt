@@ -10,10 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.blankj.utilcode.util.ToastUtils
+import com.toh.shared.WearableBridgeTag
 import com.toh.shared.utils.LocaleManager
 import com.toh.wearossample.R
 import com.toh.wearossample.data.ApplicationModules
+import com.toh.wearossample.helper.NotificationHelper
 import com.toh.wearossample.helper.wearable.WearableHelper.WearableMessageEvent
+import com.toh.wearossample.utils.PermissionUtils
 import com.toh.wearossample.utils.commons.Constants
 import com.utility.DebugLog
 import org.greenrobot.eventbus.EventBus
@@ -43,6 +46,20 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.bt_sync_settings).setOnClickListener {
             ToastUtils.showShort("Start sync settings")
             ApplicationModules.instant.wearableHelper?.doOnSyncAppSetting()
+        }
+        findViewById<View>(R.id.bt_notification_with_bridge_home).setOnClickListener {
+            if (PermissionUtils.isPostNotificationsPermissionGranted(this)) {
+                NotificationHelper.showNotification(this@MainActivity, bridgeTag = WearableBridgeTag.Excluded.HOME)
+            } else {
+                PermissionUtils.requestPostNotificationsPermission(this@MainActivity)
+            }
+        }
+        findViewById<View>(R.id.bt_notification_with_bridge_other).setOnClickListener {
+            if (PermissionUtils.isPostNotificationsPermissionGranted(this)) {
+                NotificationHelper.showNotification(this@MainActivity, bridgeTag = WearableBridgeTag.Pushable.OTHERS)
+            } else {
+                PermissionUtils.requestPostNotificationsPermission(this@MainActivity)
+            }
         }
         checkLanguageChanged()
         tvLog = findViewById(R.id.tv_log)

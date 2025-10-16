@@ -135,7 +135,7 @@ object WearableUtils {
             val activityHelper = RemoteActivityHelper(context)
             val deepLink = Intent(
                 Intent.ACTION_VIEW,
-                "wft3://open/home".toUri()
+                "sample://open/home".toUri()
             ).addCategory(Intent.CATEGORY_BROWSABLE)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             try {

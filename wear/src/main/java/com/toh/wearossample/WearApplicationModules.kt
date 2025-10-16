@@ -2,6 +2,9 @@ package com.toh.wearossample
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.wear.phone.interactions.notifications.BridgingConfig
+import androidx.wear.phone.interactions.notifications.BridgingManager
+import com.toh.shared.WearableBridgeTag
 import com.toh.wearossample.helper.networkstate.NetworkStateHelper
 import com.toh.wearossample.utils.WearPreferencesHelper
 
@@ -40,6 +43,11 @@ class WearApplicationModules {
         mContext = context
         mPreferencesHelper = WearPreferencesHelper(context)
         mNetworkStateHelper = NetworkStateHelper(context.applicationContext).apply { registerNetworkReceiver() }
+        BridgingManager.fromContext(context).setConfig(
+            BridgingConfig.Builder(context, true)
+                .addExcludedTag(WearableBridgeTag.Excluded.HOME)
+                .build()
+        )
     }
 
 
