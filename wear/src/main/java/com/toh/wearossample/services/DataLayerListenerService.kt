@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.google.android.gms.wearable.CapabilityInfo
 import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.DataMapItem
@@ -57,6 +58,20 @@ class DataLayerListenerService : WearableListenerService() {
                 }
             }
         }
+    }
+
+    override fun onCapabilityChanged(capabilityInfo: CapabilityInfo) {
+        super.onCapabilityChanged(capabilityInfo)
+        val nodeCount = capabilityInfo.nodes.size
+        if (nodeCount == 0) {
+            Log.i(TAG, "onCapabilityChanged: ${capabilityInfo.name}, nodes: 0 -> Unpaired")
+        } else {
+            val pairedNote = capabilityInfo.nodes.find { node -> node.isNearby }
+            if (pairedNote != null) {
+                Log.i(TAG, "onCapabilityChanged: ${capabilityInfo.name}, nodes: $nodeCount -> Paired with node: ${pairedNote.displayName}")
+            }
+        }
+        EventBus.getDefault().post(MessageEventBus(Event.PAIR_CHANGED, capabilityInfo.name))
     }
 
     private fun doOnPingPhone(dataEvent: DataEvent) {

@@ -50,6 +50,13 @@
                 <data android:host="*" />
                 <data android:scheme="wear" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.CAPABILITY_CHANGED" />
+                <data
+                    android:host="*"
+                    android:pathPrefix="/WEARABLE_CAPABILITY"
+                    android:scheme="wear" />
+            </intent-filter>
         </service>
 
     </application>

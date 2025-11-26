@@ -12,7 +12,6 @@ import com.toh.wearossample.WearApplicationModules
 import com.toh.wearossample.base.BaseThemeViewModel
 import com.toh.wearossample.eventbus.Event
 import com.toh.wearossample.eventbus.MessageEventBus
-import com.toh.wearossample.presentation.ScreenRoute
 import com.toh.wearossample.utils.WearableUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -59,11 +58,13 @@ class MainViewModel(context: Context) : BaseThemeViewModel() {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onPingPhoneReply(messageEvent: MessageEventBus) {
+    fun onMessage(messageEvent: MessageEventBus) {
         if (messageEvent.event == Event.PING_PHONE_REPLY) {
             (messageEvent.extraValue as? String)?.let {
                 ToastUtils.showShort("Phone reply: \n$it")
             }
+        } else if (messageEvent.event == Event.PAIR_CHANGED) {
+            getPairedNodes()
         }
     }
 
